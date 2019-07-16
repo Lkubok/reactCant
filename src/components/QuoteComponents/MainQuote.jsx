@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 export function MainQuote(props) {
   return (
-    <div className="card " style={{ maxWidth: "540px" }}>
+    <div className="card mt-3" style={{ maxWidth: "540px" }}>
       <div className="row no-gutters">
         <div className="col-md-4 text-center">
           <img
