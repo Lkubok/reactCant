@@ -2,7 +2,7 @@ const initialState = {
   profileSlopeValue: 0,
   laneOffsetValue: 3.5,
   additionalSlopeValue: 0,
-  normalCrownSlope: 2,
+  normalCrownSlope: -2,
   fullSuperSlope: 5,
   lengthOfCant: 40
 };

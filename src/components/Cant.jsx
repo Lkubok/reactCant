@@ -12,6 +12,7 @@ export class Cant extends Component {
   constructor(props) {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleCalculate = this.handleCalculate.bind(this);
   }
   handleOnChange(e) {
     let { type, name, value } = e.target;
@@ -19,6 +20,20 @@ export class Cant extends Component {
     console.log(value);
     if (name === "mainSlope") this.props.changeProfileSlope(value);
     if (name === "laneOffset") this.props.changeOffsetValue(value);
+    if (name === "normalCrown") this.props.updateNormalCrown(value);
+    if (name === "fullCrown") this.props.updateFullCrown(value);
+    if (name === "lengthOfCant") this.props.updateLengthOfCant(value);
+  }
+  handleCalculate() {
+    const {
+      profileSlopeValue: profile,
+      laneOffsetValue: lane,
+      normalCrownSlope: normal,
+      fullSuperSlope: full,
+      lengthOfCant: length
+    } = this.props;
+    console.log(profile, lane, normal, full, length);
+    return ((Math.abs(normal) + Math.abs(full)) * lane) / length;
   }
   render() {
     return (
@@ -38,7 +53,6 @@ export class Cant extends Component {
               className="form-control"
               name="mainSlope"
               id="mainSlope"
-              placeholder="2"
             />
           </div>
           <div className="form-group col-md-6">
@@ -53,57 +67,62 @@ export class Cant extends Component {
               className="form-control"
               name="laneOffset"
               id="laneOffset"
-              placeholder=""
             />
           </div>
         </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-4">
+            <label htmlFor="normalCrown">
+              Normal Crown Slope [%] (- is down)
+            </label>
+            <input
+              onChange={this.handleOnChange}
+              value={this.props.normalCrownSlope}
+              type="number"
+              step="0.1"
+              max="15"
+              min="-15"
+              className="form-control"
+              name="normalCrown"
+              id="normalCrown"
+            />
+          </div>
+          <div className="form-group col-md-4">
+            <label htmlFor="fullCrown">Full Super Slope [%]</label>
+            <input
+              onChange={this.handleOnChange}
+              value={this.props.fullSuperSlope}
+              type="number"
+              step="0.1"
+              className="form-control"
+              name="fullCrown"
+              id="fullCrown"
+            />
+          </div>
+          <div className="form-group col-md-4">
+            <label htmlFor="lengthOfCant">Length of Cant [m]</label>
+            <input
+              onChange={this.handleOnChange}
+              value={this.props.lengthOfCant}
+              type="number"
+              step="0.1"
+              className="form-control"
+              name="lengthOfCant"
+              id="lengthOfCant"
+            />
+          </div>
+        </div>
+
         <div className="form-group">
           <label htmlFor="additionalSlope">Additional slope on Edges</label>
           <input
             type="text"
             className="form-control"
             id="additionalSlope"
-            placeholder="1234 Main St"
             disabled={true}
+            value={this.handleCalculate()}
           />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputAddress2">Address 2</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress2"
-            placeholder="Apartment, studio, or floor"
-          />
-        </div>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="inputCity">City</label>
-            <input type="text" className="form-control" id="inputCity" />
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="inputState">State</label>
-            <select id="inputState" className="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
-          </div>
-          <div className="form-group col-md-2">
-            <label htmlFor="inputZip">Zip</label>
-            <input type="text" className="form-control" id="inputZip" />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="gridCheck"
-            />
-            <label className="form-check-label" htmlFor="gridCheck">
-              Check me out
-            </label>
-          </div>
         </div>
       </form>
     );
