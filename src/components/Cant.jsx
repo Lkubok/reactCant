@@ -7,12 +7,14 @@ import {
   updateLengthOfCant
 } from "../actions";
 import { connect } from "react-redux";
+import CantParams from "./CantParams";
 
 export class Cant extends Component {
   constructor(props) {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleCalculate = this.handleCalculate.bind(this);
+    this.handleEdge = this.handleEdge.bind(this);
   }
   handleOnChange(e) {
     let { type, name, value } = e.target;
@@ -33,8 +35,11 @@ export class Cant extends Component {
       lengthOfCant: length
     } = this.props;
     console.log(profile, lane, normal, full, length);
-    return ((Math.abs(normal) + Math.abs(full)) * lane) / length;
+    const addSlope = ((Math.abs(normal) + Math.abs(full)) * lane) / length;
+
+    return addSlope;
   }
+  handleEdge() {}
   render() {
     return (
       <form className="mt-5">
@@ -121,9 +126,10 @@ export class Cant extends Component {
             className="form-control"
             id="additionalSlope"
             disabled={true}
-            value={this.handleCalculate()}
+            value={this.props.additionalSlopeValue}
           />
         </div>
+        <CantParams />
       </form>
     );
   }
