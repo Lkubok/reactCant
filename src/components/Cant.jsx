@@ -4,10 +4,12 @@ import {
   updateOffsetValue,
   updateNormalCrown,
   updateFullCrown,
-  updateLengthOfCant
+  updateLengthOfCant,
+  updateAdditionalSlope
 } from "../actions";
 import { connect } from "react-redux";
 import CantParams from "./CantParams";
+import LeftRightSelect from "./LeftRightSelect";
 
 export class Cant extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ export class Cant extends Component {
     this.handleEdge = this.handleEdge.bind(this);
   }
   handleOnChange(e) {
-    let { type, name, value } = e.target;
+    let { name, value } = e.target;
     value = parseFloat(value);
     console.log(value);
     if (name === "mainSlope") this.props.changeProfileSlope(value);
@@ -35,8 +37,9 @@ export class Cant extends Component {
       lengthOfCant: length
     } = this.props;
     console.log(profile, lane, normal, full, length);
-    const addSlope = ((Math.abs(normal) + Math.abs(full)) * lane) / length;
 
+    const addSlope = ((Math.abs(normal) + Math.abs(full)) * lane) / length;
+    this.props.updateAdditionalSlope(addSlope); // IT HAPPENS TWICE... WHY  ????
     return addSlope;
   }
   handleEdge() {}
@@ -126,10 +129,11 @@ export class Cant extends Component {
             className="form-control"
             id="additionalSlope"
             disabled={true}
-            value={this.props.additionalSlopeValue}
+            value={this.handleCalculate()}
           />
         </div>
         <CantParams />
+        <LeftRightSelect />
       </form>
     );
   }
@@ -149,7 +153,8 @@ const mapDispatchToProps = dispatch => ({
   changeOffsetValue: arg => dispatch(updateOffsetValue(arg)),
   updateNormalCrown: arg => dispatch(updateNormalCrown(arg)),
   updateFullCrown: arg => dispatch(updateFullCrown(arg)),
-  updateLengthOfCant: arg => dispatch(updateLengthOfCant(arg))
+  updateLengthOfCant: arg => dispatch(updateLengthOfCant(arg)),
+  updateAdditionalSlope: arg => dispatch(updateAdditionalSlope(arg))
 });
 
 export default connect(

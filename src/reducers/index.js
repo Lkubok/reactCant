@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { cantReducer } from "./cantReducer";
 import { quoteReducer } from "./quoteReducer";
-import { cantParams } from "./cantParams";
+import { paramsReducer } from "./paramsReducer";
 
-export default combineReducers({ cantReducer, quoteReducer, cantParams });
+export default combineReducers({ cantReducer, quoteReducer, paramsReducer });

@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { updateLeftEdge, updateRightEdge } from "../actions";
 
 export class CantParams extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLeftOk: true,
-      isRightOk: true
+      isRightOk: true,
+      leftSlope: 0,
+      rightSlope: 0
     };
     this.handleCheck = this.handleCheck.bind(this);
   }
-  handleCheck() {
+  handleCheck(e) {
+    const { name } = e.target;
     return 4;
   }
   render() {
@@ -23,7 +27,7 @@ export class CantParams extends Component {
             className="form-control"
             id="leftSlope"
             disabled={true}
-            value={this.handleCheck}
+            value={this.props.leftSlope}
           />
         </div>
         <div className="form-group col-md-6">
@@ -33,7 +37,7 @@ export class CantParams extends Component {
             className="form-control"
             id="rightSlope"
             disabled={true}
-            value={this.handleCheck}
+            value={this.props.rightSlope}
           />
         </div>
       </div>
@@ -43,10 +47,17 @@ export class CantParams extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   profileSlope: state.cantReducer.profileSlopeValue,
-  additionalSlope: state.cantReducer.additionalSlopeValue
+  additionalSlope: state.cantReducer.additionalSlopeValue,
+  rightSlope: state.paramsReducer.rightEdgeSlope,
+  leftSlope: state.paramsReducer.leftEdgeSlope
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateLeftEdge: arg => dispatch(updateLeftEdge(arg)),
+  updateRightEdge: arg => dispatch(updateRightEdge(arg))
 });
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(CantParams);

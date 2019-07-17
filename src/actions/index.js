@@ -29,3 +29,19 @@ export const updateLengthOfCant = lengthOfCant => ({
   type: "UPDATE_LEGTH_CANT",
   lengthOfCant
 });
+export const updateAdditionalSlope = additionalSlope => ({
+  type: "UPDATE_ADDITIONAL_SLOPE",
+  additionalSlope
+});
+export const updateLeftEdge = leftEdgeSlope => ({
+  type: "UPDATE_LEFT_EDGE",
+  leftEdgeSlope
+});
+export const updateRightEdge = rightEdgeSlope => ({
+  type: "UPDATE_RIGHT_EDGE",
+  rightEdgeSlope
+});
+export const updateSide = side => ({
+  type: "UPDATE_SIDE",
+  side
+});

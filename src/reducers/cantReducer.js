@@ -8,46 +8,34 @@ const initialState = {
 };
 
 export const cantReducer = (state = initialState, action) => {
-  const {
-    normalCrownSlope: normal,
-    fullSuperSlope: full,
-    lengthOfCant: length,
-    laneOffsetValue: lane
-  } = state;
-
-  const addSlope = ((Math.abs(normal) + Math.abs(full)) * lane) / length;
-
   switch (action.type) {
     case "UPDATE_SLOPE_VALUE":
       return {
         ...state,
-        profileSlopeValue: action.slopeValue,
-        additionalSlopeValue: addSlope
+        profileSlopeValue: action.slopeValue
       };
     case "UPDATE_OFFSET_VALUE":
       return {
         ...state,
-        laneOffsetValue: action.offsetValue,
-        additionalSlopeValue: addSlope
+        laneOffsetValue: action.offsetValue
       };
     case "UPDATE_NORMAL_SLOPE":
       return {
         ...state,
-        normalCrownSlope: action.normalCrownSlope,
-        additionalSlopeValue: addSlope
+        normalCrownSlope: action.normalCrownSlope
       };
     case "UPDATE_FULL_SLOPE":
       return {
         ...state,
-        fullSuperSlope: action.fullSuperSlope,
-        additionalSlopeValue: addSlope
+        fullSuperSlope: action.fullSuperSlope
       };
     case "UPDATE_LEGTH_CANT":
       return {
         ...state,
-        lengthOfCant: action.lengthOfCant,
-        additionalSlopeValue: addSlope
+        lengthOfCant: action.lengthOfCant
       };
+    case "UPDATE_ADDITIONAL_SLOPE":
+      return { ...state, additionalSlopeValue: action.additionalSlope };
     default:
       return state;
   }
