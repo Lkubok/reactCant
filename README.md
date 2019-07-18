@@ -13,7 +13,13 @@ git clone https://github.com/Lkubok/reactCant.git
 npm install
 ```
 
-3. After instalation, you can use Super Elevation Calculator on
+3. To start aplication type:
+
+```
+npm run start
+```
+
+4. After instalation, you can use Super Elevation Calculator on
 
 ```
 localhost:3000
