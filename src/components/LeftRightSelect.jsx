@@ -8,37 +8,57 @@ export class LeftRightSelect extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
-    const { name, value, type } = e.target;
+    const { value, type } = e.target;
     if (type === "radio") this.props.updateSide(value);
-
-    console.log("changed");
   }
   render() {
     return (
-      <div className="form-row">
-        <div className="form-group col-md-6">
-          <label htmlFor="leftSide">Curve to the left</label>
-          <input
-            type="radio"
-            name="side"
-            value="left"
+      <div>
+        <div className="input-group pt-3">
+          <div className="input-group-prepend">
+            <div className="input-group-text">
+              <input
+                type="radio"
+                aria-label="Curve To the left"
+                name="side"
+                value="left"
+                id="left"
+                checked={this.props.side === "left"}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <label
+            htmlFor="left"
+            type="text"
             className="form-control"
-            id="leftSide"
-            checked={this.props.side === "left"}
-            onChange={this.handleChange}
-          />
+            aria-label="Text input with radio button"
+          >
+            Curve to the left
+          </label>
         </div>
-        <div className="form-group col-md-6">
-          <label htmlFor="rightSide">Curve to the right</label>
-          <input
-            type="radio"
-            name="side"
-            value="right"
+        <div className="input-group pt-4 pb-4">
+          <div className="input-group-prepend">
+            <div className="input-group-text">
+              <input
+                type="radio"
+                aria-label="Curve to the right"
+                name="side"
+                value="right"
+                id="right"
+                checked={this.props.side === "right"}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <label
+            htmlFor="right"
+            type="text"
             className="form-control"
-            id="rightSide"
-            checked={this.props.side === "right"}
-            onChange={this.handleChange}
-          />
+            aria-label="Text input with radio button"
+          >
+            Curve to the right
+          </label>
         </div>
       </div>
     );

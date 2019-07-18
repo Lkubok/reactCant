@@ -1,55 +1,45 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { updateLeftEdge, updateRightEdge } from "../actions";
+import * as selectors from "../reducers/selectors";
 
-export class CantParams extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLeftOk: true,
-      isRightOk: true,
-      leftSlope: 0,
-      rightSlope: 0
-    };
-    this.handleCheck = this.handleCheck.bind(this);
-  }
-  handleCheck(e) {
-    const { name } = e.target;
-    return 4;
-  }
+export class CantParams extends PureComponent {
+  checkEdgeSlope = side => {
+    if (side === "right")
+      return Math.sign(this.props.rightSlope) ===
+        Math.sign(this.props.mainSlope)
+        ? "alert-success"
+        : "alert-danger";
+    return Math.sign(this.props.leftSlope) === Math.sign(this.props.mainSlope)
+      ? "alert-success"
+      : "alert-danger";
+  };
   render() {
     return (
       <div className="form-row">
         <div className="form-group col-md-6">
-          <label htmlFor="leftSlope">Slope on the Left Edge</label>
-          <input
-            type="text"
-            className="form-control"
-            id="leftSlope"
-            disabled={true}
-            value={this.props.leftSlope}
-          />
+          <p className="text-center">Slope on the left edge</p>
+          <div className={`form-control ${this.checkEdgeSlope("left")}`}>
+            {this.props.leftSlope}
+          </div>
         </div>
         <div className="form-group col-md-6">
-          <label htmlFor="rightSlope">Slope on the right Edge</label>
-          <input
-            type="text"
-            className="form-control"
-            id="rightSlope"
-            disabled={true}
-            value={this.props.rightSlope}
-          />
+          <p className="text-center">Slope on the right edge</p>
+          <div className={`form-control ${this.checkEdgeSlope("right")}`}>
+            {this.props.rightSlope}
+          </div>
         </div>
       </div>
     );
   }
 }
 
+//SELECTORS USAGE
+
 const mapStateToProps = (state, ownProps) => ({
-  profileSlope: state.cantReducer.profileSlopeValue,
-  additionalSlope: state.cantReducer.additionalSlopeValue,
-  rightSlope: state.paramsReducer.rightEdgeSlope,
-  leftSlope: state.paramsReducer.leftEdgeSlope
+  rightSlope: selectors.sideSlopeSelector(state, "right"),
+  leftSlope: selectors.sideSlopeSelector(state, "left"),
+  mainSlope: selectors.getProfileSlopeValue(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
-import { addQuote, updateQuote } from "../actions";
+import { updateQuoteTwo } from "../actions";
 import MainQuote from "./QuoteComponents/MainQuote";
 
 export class Quote extends Component {
@@ -10,31 +9,18 @@ export class Quote extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchQuote();
-  }
-
   handleChange() {
-    this.fetchQuote();
+    this.props.updateQuoteTwo();
   }
 
-  fetchQuote() {
-    axios
-      .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
-      .then(response =>
-        this.props.changeMainQuote(
-          response.data[0].quote,
-          response.data[0].quoteAuthor
-        )
-      );
-  }
+  componentDidMount() {}
 
   render() {
     return (
-      <div>
+      <div className="container d-flex flex-column justify-content-center">
         <MainQuote />
         <button className="btn btn-light m-3" onClick={this.handleChange}>
-          Change Main Quote
+          Fetch new Quote
         </button>
       </div>
     );
@@ -46,10 +32,9 @@ export class Quote extends Component {
   author: state.quoteReducer.author
 }); */
 
-const mapDispatchToProps = dispatch => ({
-  changeMainQuote: (quote, author) => dispatch(updateQuote(quote, author)),
-  addQuote: (quote, author) => dispatch(addQuote(quote, author))
-});
+const mapDispatchToProps = {
+  updateQuoteTwo
+};
 
 export default connect(
   null,

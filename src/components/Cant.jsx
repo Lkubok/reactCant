@@ -7,28 +7,35 @@ import {
   updateLengthOfCant,
   updateAdditionalSlope
 } from "../actions";
+
 import { connect } from "react-redux";
 import CantParams from "./CantParams";
 import LeftRightSelect from "./LeftRightSelect";
+import * as selectors from "../reducers/selectors";
 
 export class Cant extends Component {
   constructor(props) {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleCalculate = this.handleCalculate.bind(this);
+    // this.handleCalculate = this.handleCalculate.bind(this);
     this.handleEdge = this.handleEdge.bind(this);
   }
   handleOnChange(e) {
     let { name, value } = e.target;
     value = parseFloat(value);
-    console.log(value);
     if (name === "mainSlope") this.props.changeProfileSlope(value);
     if (name === "laneOffset") this.props.changeOffsetValue(value);
     if (name === "normalCrown") this.props.updateNormalCrown(value);
     if (name === "fullCrown") this.props.updateFullCrown(value);
     if (name === "lengthOfCant") this.props.updateLengthOfCant(value);
   }
-  handleCalculate() {
+
+  handleOnChangeNew = callback => e => {
+    let { value } = e.target;
+    value = parseFloat(value);
+    callback(value);
+  };
+  /*   handleCalculate() {
     const {
       profileSlopeValue: profile,
       laneOffsetValue: lane,
@@ -41,7 +48,7 @@ export class Cant extends Component {
     const addSlope = ((Math.abs(normal) + Math.abs(full)) * lane) / length;
     this.props.updateAdditionalSlope(addSlope); // IT HAPPENS TWICE... WHY  ????
     return addSlope;
-  }
+  } */
   handleEdge() {}
   render() {
     return (
@@ -52,7 +59,7 @@ export class Cant extends Component {
               Main profile slope in %: (up is +, down is -)
             </label>
             <input
-              onChange={this.handleOnChange}
+              onChange={this.handleOnChangeNew(this.props.changeProfileSlope)}
               value={this.props.profileSlopeValue}
               type="number"
               step="0.1"
@@ -129,23 +136,23 @@ export class Cant extends Component {
             className="form-control"
             id="additionalSlope"
             disabled={true}
-            value={this.handleCalculate()}
+            value={this.props.result}
           />
         </div>
-        <CantParams />
         <LeftRightSelect />
+        <CantParams />
       </form>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  profileSlopeValue: state.cantReducer.profileSlopeValue,
-  laneOffsetValue: state.cantReducer.laneOffsetValue,
-  additionalSlopeValue: state.cantReducer.additionalSlopeValue,
-  normalCrownSlope: state.cantReducer.normalCrownSlope,
-  fullSuperSlope: state.cantReducer.fullSuperSlope,
-  lengthOfCant: state.cantReducer.lengthOfCant
+  result: selectors.resultSelector(state, 1),
+  fullSuperSlope: selectors.getFullSuperSlope(state),
+  lengthOfCant: selectors.getLengthOfCant(state),
+  normalCrownSlope: selectors.getNormalCrownSlope(state),
+  laneOffsetValue: selectors.getLaneOffsetValue(state),
+  profileSlopeValue: selectors.getProfileSlopeValue(state)
 });
 
 const mapDispatchToProps = dispatch => ({

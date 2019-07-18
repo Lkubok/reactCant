@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const updateQuote = (quote, author) => ({
   type: "UPDATE_QUOTE",
   quote,
@@ -45,3 +47,35 @@ export const updateSide = side => ({
   type: "UPDATE_SIDE",
   side
 });
+/* export const updateQuoteTwo = (dispatch, quote) => {
+  axios
+    .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
+    .then(response =>
+      dispatch(
+        updateQuote(response.data[0].quote, response.data[0].quoteAuthor)
+      )
+    );
+}; */
+
+/* export const updateQuoteTwo = (dispatch, quote) => {
+  axios
+    .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
+    .then(response =>
+      dispatch(
+        updateQuote(response.data[0].quote, response.data[0].quoteAuthor)
+      )
+    );
+}; */
+
+// THUNK !!!!!!
+
+export const updateQuoteTwo = quote => dispatch => {
+  dispatch(updateQuote("Loading"));
+  axios
+    .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
+    .then(response =>
+      dispatch(
+        updateQuote(response.data[0].quote, response.data[0].quoteAuthor)
+      )
+    );
+};
