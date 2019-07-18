@@ -14,7 +14,11 @@ export const resultSelector = createSelector(
   getFullSuperSlope,
   getLengthOfCant,
   (lane, normal, full, length) => {
-    return ((Math.abs(normal) + Math.abs(full)) * lane) / length;
+    return (
+      Math.round(
+        (((Math.abs(normal) + Math.abs(full)) * lane) / length) * 100
+      ) / 100
+    );
   }
 );
 
@@ -26,7 +30,7 @@ export const sideSlopeSelector = createSelector(
   resultSelector,
   getSecondArg,
   (side, profile, addSlope, argSide) => {
-    if (side === argSide) return profile - addSlope;
-    return profile + addSlope;
+    if (side === argSide) return Math.round((profile - addSlope) * 100) / 100;
+    return Math.round((profile + addSlope) * 100) / 100;
   }
 );
