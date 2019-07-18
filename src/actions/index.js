@@ -79,3 +79,12 @@ export const updateQuoteTwo = quote => dispatch => {
       )
     );
 };
+
+export const updateAtLaunch = arrayWithUpdates => dispatch => {
+  console.log(arrayWithUpdates);
+  dispatch(updateNormalCrown(arrayWithUpdates.normal));
+  dispatch(updateFullCrown(arrayWithUpdates.full));
+  dispatch(updateLengthOfCant(arrayWithUpdates.length));
+  dispatch(updateOffsetValue(arrayWithUpdates.lane));
+  dispatch(updateProfileSlopeValue(arrayWithUpdates.profile));
+};

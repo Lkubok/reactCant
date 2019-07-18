@@ -13,11 +13,42 @@ import About from "./components/About";
 import Quote from "./components/Quote";
 import NotFoundPage from "./components/NotFound";
 import { connect } from "react-redux";
-import { updateQuoteTwo } from "./actions";
+import { updateQuoteTwo, updateAtLaunch } from "./actions";
+import * as selectors from "./reducers/selectors";
 
 export class App extends Component {
   componentDidMount() {
     this.props.updateQuoteTwo();
+    if (localStorage.getItem("full")) {
+      const objWithUpdates = {
+        full: parseInt(localStorage.getItem("full")),
+        length: parseInt(localStorage.getItem("length")),
+        normal: parseInt(localStorage.getItem("normal")),
+        lane: parseInt(localStorage.getItem("lane")),
+        profile: parseInt(localStorage.getItem("profile"))
+      };
+
+      this.props.updateAtLaunch(objWithUpdates);
+    }
+  }
+  componentDidUpdate() {
+    const {
+      fullSuperSlope: full,
+      lengthOfCant: length,
+      normalCrownSlope: normal,
+      laneOffsetValue: lane,
+      profileSlopeValue: profile
+    } = this.props;
+    const itemToStore = {
+      full: full,
+      length: length,
+      normal: normal,
+      lane: lane,
+      profile: profile
+    };
+    for (let property in itemToStore) {
+      localStorage.setItem(property, itemToStore[property]);
+    }
   }
   render() {
     return (
@@ -43,12 +74,20 @@ export class App extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => ({
+  fullSuperSlope: selectors.getFullSuperSlope(state),
+  lengthOfCant: selectors.getLengthOfCant(state),
+  normalCrownSlope: selectors.getNormalCrownSlope(state),
+  laneOffsetValue: selectors.getLaneOffsetValue(state),
+  profileSlopeValue: selectors.getProfileSlopeValue(state)
+});
 
 const mapDispatchToProps = {
-  updateQuoteTwo
+  updateQuoteTwo,
+  updateAtLaunch
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
