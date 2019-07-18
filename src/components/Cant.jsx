@@ -130,7 +130,7 @@ export class Cant extends Component {
         </div>
 
         <div className="form-group">
-          <label htmlFor="additionalSlope">Additional slope on Edges</label>
+          <label htmlFor="additionalSlope">Additional slope on Edges [%]</label>
           <input
             type="text"
             className="form-control"

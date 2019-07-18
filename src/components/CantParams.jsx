@@ -18,13 +18,13 @@ export class CantParams extends PureComponent {
     return (
       <div className="form-row">
         <div className="form-group col-md-6">
-          <p className="text-center">Slope on the left edge</p>
+          <p className="text-center">Slope on the left edge [%]</p>
           <div className={`form-control ${this.checkEdgeSlope("left")}`}>
             {this.props.leftSlope}
           </div>
         </div>
         <div className="form-group col-md-6">
-          <p className="text-center">Slope on the right edge</p>
+          <p className="text-center">Slope on the right edge [%]</p>
           <div className={`form-control ${this.checkEdgeSlope("right")}`}>
             {this.props.rightSlope}
           </div>
