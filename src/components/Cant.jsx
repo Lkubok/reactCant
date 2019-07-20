@@ -50,10 +50,13 @@ export class Cant extends Component {
   } */
   checkAddSlope = () => {
     const { designSpeed: speed, result } = this.props;
-    if (speed >= 100) return result <= 0.9 ? "alert-success" : "alert-danger";
-    if (speed >= 80) return result <= 1.0 ? "alert-success" : "alert-danger";
-    if (speed >= 60) return result <= 1.6 ? "alert-success" : "alert-danger";
-    return result <= 2.0 ? "alert-success" : "alert-danger";
+    if (speed >= 100)
+      return result <= 0.9 && result >= 0.35 ? "alert-success" : "alert-danger";
+    if (speed >= 80)
+      return result <= 1.0 && result >= 0.35 ? "alert-success" : "alert-danger";
+    if (speed >= 60)
+      return result <= 1.6 && result >= 0.35 ? "alert-success" : "alert-danger";
+    return result <= 2.0 && result >= 0.35 ? "alert-success" : "alert-danger";
   };
   render() {
     return (
