@@ -23,7 +23,7 @@ export class CantParams extends PureComponent {
       </div>
     ) : (
       <div className="form-control alert-danger">
-        {`Main slope is ${this.props.mainSlope} % but should be 
+        {`Main slope is ${this.props.mainSlope} % but should be minimum 
         ${this.props.awaitedMainSlopeValue} %`}
       </div>
     );
