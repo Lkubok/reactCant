@@ -1,4 +1,4 @@
-# Road Cant utility
+# Super Elevation utility
 
 1. clone git repository with
 
