@@ -1,4 +1,4 @@
-# Super Elevation utility
+# Super Elevation utility Installation
 
 1. clone git repository with
 
@@ -24,3 +24,7 @@ npm run start
 ```
 localhost:3000
 ```
+
+# Used technologies:
+
+### React.js, Redux, Redux-thunk, Axios, Bootstrap
