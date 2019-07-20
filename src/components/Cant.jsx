@@ -4,7 +4,8 @@ import {
   updateOffsetValue,
   updateNormalCrown,
   updateFullCrown,
-  updateLengthOfCant
+  updateLengthOfCant,
+  updateDesignSpeed
 } from "../actions";
 
 import { connect } from "react-redux";
@@ -25,6 +26,7 @@ export class Cant extends Component {
     if (name === "normalCrown") this.props.updateNormalCrown(value);
     if (name === "fullCrown") this.props.updateFullCrown(value);
     if (name === "lengthOfCant") this.props.updateLengthOfCant(value);
+    if (name === "designSpeed") this.props.updateDesignSpeed(value);
   }
 
   handleOnChangeNew = callback => e => {
@@ -46,12 +48,19 @@ export class Cant extends Component {
     this.props.updateAdditionalSlope(addSlope); // IT HAPPENS TWICE... WHY  ????
     return addSlope;
   } */
+  checkAddSlope = () => {
+    const { designSpeed: speed, result } = this.props;
+    if (speed >= 100) return result <= 0.9 ? "alert-success" : "alert-danger";
+    if (speed >= 80) return result <= 1.0 ? "alert-success" : "alert-danger";
+    if (speed >= 60) return result <= 1.6 ? "alert-success" : "alert-danger";
+    return result <= 2.0 ? "alert-success" : "alert-danger";
+  };
   render() {
     return (
       <>
         <form className="mt-5">
           <div className="form-row">
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-4">
               <label htmlFor="mainSlope">
                 Main profile slope in %: (up is +, down is -)
               </label>
@@ -67,7 +76,7 @@ export class Cant extends Component {
                 id="mainSlope"
               />
             </div>
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-4">
               <label htmlFor="laneOffset">
                 Offset to edge of lane from rotation axis [m]
               </label>
@@ -79,6 +88,20 @@ export class Cant extends Component {
                 className="form-control"
                 name="laneOffset"
                 id="laneOffset"
+              />
+            </div>
+            <div className="form-group col-md-4">
+              <label htmlFor="designSpeed">Design speed [km/h]</label>
+              <input
+                onChange={this.handleOnChange}
+                value={this.props.designSpeed}
+                type="number"
+                step="10"
+                min="30"
+                max="120"
+                className="form-control"
+                name="designSpeed"
+                id="designSpeed"
               />
             </div>
           </div>
@@ -130,13 +153,9 @@ export class Cant extends Component {
             <label htmlFor="additionalSlope">
               Additional slope on Edges [%]
             </label>
-            <input
-              type="text"
-              className="form-control"
-              id="additionalSlope"
-              disabled={true}
-              value={this.props.result}
-            />
+            <div className={`form-control ${this.checkAddSlope()}`}>
+              {this.props.result}
+            </div>
           </div>
           <LeftRightSelect />
           <CantParams />
@@ -152,7 +171,8 @@ const mapStateToProps = (state, ownProps) => ({
   lengthOfCant: selectors.getLengthOfCant(state),
   normalCrownSlope: selectors.getNormalCrownSlope(state),
   laneOffsetValue: selectors.getLaneOffsetValue(state),
-  profileSlopeValue: selectors.getProfileSlopeValue(state)
+  profileSlopeValue: selectors.getProfileSlopeValue(state),
+  designSpeed: selectors.getDesignSpeedValue(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -160,7 +180,8 @@ const mapDispatchToProps = dispatch => ({
   changeOffsetValue: arg => dispatch(updateOffsetValue(arg)),
   updateNormalCrown: arg => dispatch(updateNormalCrown(arg)),
   updateFullCrown: arg => dispatch(updateFullCrown(arg)),
-  updateLengthOfCant: arg => dispatch(updateLengthOfCant(arg))
+  updateLengthOfCant: arg => dispatch(updateLengthOfCant(arg)),
+  updateDesignSpeed: arg => dispatch(updateDesignSpeed(arg))
 });
 
 export default connect(

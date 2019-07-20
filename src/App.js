@@ -26,7 +26,8 @@ export class App extends Component {
         length: parseFloat(localStorage.getItem("length")),
         normal: parseFloat(localStorage.getItem("normal")),
         lane: parseFloat(localStorage.getItem("lane")),
-        profile: parseFloat(localStorage.getItem("profile"))
+        profile: parseFloat(localStorage.getItem("profile")),
+        speed: parseFloat(localStorage.getItem("speed"))
       };
 
       this.props.updateAtLaunch(objWithUpdates);
@@ -38,14 +39,16 @@ export class App extends Component {
       lengthOfCant: length,
       normalCrownSlope: normal,
       laneOffsetValue: lane,
-      profileSlopeValue: profile
+      profileSlopeValue: profile,
+      speed
     } = this.props;
     const itemToStore = {
       full: full,
       length: length,
       normal: normal,
       lane: lane,
-      profile: profile
+      profile: profile,
+      speed: speed
     };
     for (let property in itemToStore) {
       localStorage.setItem(property, itemToStore[property]);
@@ -83,7 +86,8 @@ const mapStateToProps = (state, ownProps) => ({
   lengthOfCant: selectors.getLengthOfCant(state),
   normalCrownSlope: selectors.getNormalCrownSlope(state),
   laneOffsetValue: selectors.getLaneOffsetValue(state),
-  profileSlopeValue: selectors.getProfileSlopeValue(state)
+  profileSlopeValue: selectors.getProfileSlopeValue(state),
+  speed: selectors.getDesignSpeedValue(state)
 });
 
 const mapDispatchToProps = {

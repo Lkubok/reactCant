@@ -27,6 +27,8 @@ export const cantReducer = (state = initialParams, action) => {
         ...state,
         lengthOfCant: action.lengthOfCant
       };
+    case "UPDATE_DESIGN_SPEED":
+      return { ...state, designSpeed: action.speed };
     default:
       return state;
   }

@@ -44,6 +44,10 @@ export const updateSide = side => ({
   type: "UPDATE_SIDE",
   side
 });
+export const updateDesignSpeed = speed => ({
+  type: "UPDATE_DESIGN_SPEED",
+  speed
+});
 /* export const updateQuoteTwo = (dispatch, quote) => {
   axios
     .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
@@ -84,6 +88,7 @@ export const updateAtLaunch = arrayWithUpdates => dispatch => {
   dispatch(updateLengthOfCant(arrayWithUpdates.length));
   dispatch(updateOffsetValue(arrayWithUpdates.lane));
   dispatch(updateProfileSlopeValue(arrayWithUpdates.profile));
+  dispatch(updateDesignSpeed(arrayWithUpdates.speed));
 };
 
 export const restoreAll = initialParams => dispatch => {
@@ -92,7 +97,8 @@ export const restoreAll = initialParams => dispatch => {
     laneOffsetValue: lane,
     normalCrownSlope: normal,
     fullSuperSlope: full,
-    lengthOfCant: length
+    lengthOfCant: length,
+    designSpeed: speed
   } = initialParams;
 
   console.log("resseting");
@@ -101,6 +107,7 @@ export const restoreAll = initialParams => dispatch => {
   dispatch(updateLengthOfCant(length));
   dispatch(updateOffsetValue(lane));
   dispatch(updateProfileSlopeValue(profile));
+  dispatch(updateDesignSpeed(speed));
 };
 
 // TESTING SECTION...
