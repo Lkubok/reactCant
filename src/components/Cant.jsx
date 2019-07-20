@@ -4,8 +4,7 @@ import {
   updateOffsetValue,
   updateNormalCrown,
   updateFullCrown,
-  updateLengthOfCant,
-  updateAdditionalSlope
+  updateLengthOfCant
 } from "../actions";
 
 import { connect } from "react-redux";
@@ -17,8 +16,6 @@ export class Cant extends Component {
   constructor(props) {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
-    // this.handleCalculate = this.handleCalculate.bind(this);
-    this.handleEdge = this.handleEdge.bind(this);
   }
   handleOnChange(e) {
     let { name, value } = e.target;
@@ -49,105 +46,108 @@ export class Cant extends Component {
     this.props.updateAdditionalSlope(addSlope); // IT HAPPENS TWICE... WHY  ????
     return addSlope;
   } */
-  handleEdge() {}
   render() {
     return (
-      <form className="mt-5">
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label htmlFor="mainSlope">
-              Main profile slope in %: (up is +, down is -)
-            </label>
-            <input
-              onChange={this.handleOnChangeNew(this.props.changeProfileSlope)}
-              value={this.props.profileSlopeValue}
-              type="number"
-              step="0.1"
-              max="15"
-              min="-15"
-              className="form-control"
-              name="mainSlope"
-              id="mainSlope"
-            />
+      <>
+        <form className="mt-5">
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label htmlFor="mainSlope">
+                Main profile slope in %: (up is +, down is -)
+              </label>
+              <input
+                onChange={this.handleOnChangeNew(this.props.changeProfileSlope)}
+                value={this.props.profileSlopeValue}
+                type="number"
+                step="0.01"
+                max="15"
+                min="-15"
+                className="form-control"
+                name="mainSlope"
+                id="mainSlope"
+              />
+            </div>
+            <div className="form-group col-md-6">
+              <label htmlFor="laneOffset">
+                Offset to edge of lane from rotation axis [m]
+              </label>
+              <input
+                onChange={this.handleOnChange}
+                value={this.props.laneOffsetValue}
+                type="number"
+                step="0.1"
+                className="form-control"
+                name="laneOffset"
+                id="laneOffset"
+              />
+            </div>
           </div>
-          <div className="form-group col-md-6">
-            <label htmlFor="laneOffset">
-              Offset to edge of lane from rotation axis [m]
-            </label>
-            <input
-              onChange={this.handleOnChange}
-              value={this.props.laneOffsetValue}
-              type="number"
-              step="0.1"
-              className="form-control"
-              name="laneOffset"
-              id="laneOffset"
-            />
-          </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group col-md-4">
-            <label htmlFor="normalCrown">
-              Normal Crown Slope [%] (- is down)
+          <div className="form-row">
+            <div className="form-group col-md-4">
+              <label htmlFor="normalCrown">
+                Normal Crown Slope [%] (- is down)
+              </label>
+              <input
+                onChange={this.handleOnChange}
+                value={this.props.normalCrownSlope}
+                type="number"
+                step="0.1"
+                max="15"
+                min="-15"
+                className="form-control"
+                name="normalCrown"
+                id="normalCrown"
+              />
+            </div>
+            <div className="form-group col-md-4">
+              <label htmlFor="fullCrown">Full Super Slope [%]</label>
+              <input
+                onChange={this.handleOnChange}
+                value={this.props.fullSuperSlope}
+                type="number"
+                step="0.1"
+                className="form-control"
+                name="fullCrown"
+                id="fullCrown"
+              />
+            </div>
+            <div className="form-group col-md-4">
+              <label htmlFor="lengthOfCant">Length of Cant [m]</label>
+              <input
+                onChange={this.handleOnChange}
+                value={this.props.lengthOfCant}
+                type="number"
+                step="0.1"
+                className="form-control"
+                name="lengthOfCant"
+                id="lengthOfCant"
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="additionalSlope">
+              Additional slope on Edges [%]
             </label>
             <input
-              onChange={this.handleOnChange}
-              value={this.props.normalCrownSlope}
-              type="number"
-              step="0.1"
-              max="15"
-              min="-15"
+              type="text"
               className="form-control"
-              name="normalCrown"
-              id="normalCrown"
+              id="additionalSlope"
+              disabled={true}
+              value={this.props.result}
             />
           </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="fullCrown">Full Super Slope [%]</label>
-            <input
-              onChange={this.handleOnChange}
-              value={this.props.fullSuperSlope}
-              type="number"
-              step="0.1"
-              className="form-control"
-              name="fullCrown"
-              id="fullCrown"
-            />
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="lengthOfCant">Length of Cant [m]</label>
-            <input
-              onChange={this.handleOnChange}
-              value={this.props.lengthOfCant}
-              type="number"
-              step="0.1"
-              className="form-control"
-              name="lengthOfCant"
-              id="lengthOfCant"
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="additionalSlope">Additional slope on Edges [%]</label>
-          <input
-            type="text"
-            className="form-control"
-            id="additionalSlope"
-            disabled={true}
-            value={this.props.result}
-          />
-        </div>
-        <LeftRightSelect />
-        <CantParams />
-      </form>
+          <LeftRightSelect />
+          <CantParams />
+        </form>
+      </>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  result: selectors.resultSelector(state, 1),
+  result: selectors.addEdgeSelector(state, 1),
   fullSuperSlope: selectors.getFullSuperSlope(state),
   lengthOfCant: selectors.getLengthOfCant(state),
   normalCrownSlope: selectors.getNormalCrownSlope(state),
@@ -160,8 +160,7 @@ const mapDispatchToProps = dispatch => ({
   changeOffsetValue: arg => dispatch(updateOffsetValue(arg)),
   updateNormalCrown: arg => dispatch(updateNormalCrown(arg)),
   updateFullCrown: arg => dispatch(updateFullCrown(arg)),
-  updateLengthOfCant: arg => dispatch(updateLengthOfCant(arg)),
-  updateAdditionalSlope: arg => dispatch(updateAdditionalSlope(arg))
+  updateLengthOfCant: arg => dispatch(updateLengthOfCant(arg))
 });
 
 export default connect(

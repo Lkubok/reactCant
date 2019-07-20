@@ -1,13 +1,6 @@
-const initialState = {
-  profileSlopeValue: -1.5,
-  laneOffsetValue: 3.5,
-  additionalSlopeValue: 1,
-  normalCrownSlope: -2,
-  fullSuperSlope: 5,
-  lengthOfCant: 40
-};
+import { initialParams } from "./initialParams";
 
-export const cantReducer = (state = initialState, action) => {
+export const cantReducer = (state = initialParams, action) => {
   switch (action.type) {
     case "UPDATE_SLOPE_VALUE":
       return {
@@ -34,8 +27,6 @@ export const cantReducer = (state = initialState, action) => {
         ...state,
         lengthOfCant: action.lengthOfCant
       };
-    case "UPDATE_ADDITIONAL_SLOPE":
-      return { ...state, additionalSlopeValue: action.additionalSlope };
     default:
       return state;
   }

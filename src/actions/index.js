@@ -1,4 +1,5 @@
 import axios from "axios";
+import { initialParams } from "../reducers/initialParams";
 
 export const updateQuote = (quote, author) => ({
   type: "UPDATE_QUOTE",
@@ -30,10 +31,6 @@ export const updateFullCrown = fullSuperSlope => ({
 export const updateLengthOfCant = lengthOfCant => ({
   type: "UPDATE_LEGTH_CANT",
   lengthOfCant
-});
-export const updateAdditionalSlope = additionalSlope => ({
-  type: "UPDATE_ADDITIONAL_SLOPE",
-  additionalSlope
 });
 export const updateLeftEdge = leftEdgeSlope => ({
   type: "UPDATE_LEFT_EDGE",
@@ -70,7 +67,7 @@ export const updateSide = side => ({
 // THUNK !!!!!!
 
 export const updateQuoteTwo = quote => dispatch => {
-  dispatch(updateQuote("Loading"));
+  dispatch(updateQuote("Loading..."));
   axios
     .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
     .then(response =>
@@ -87,4 +84,27 @@ export const updateAtLaunch = arrayWithUpdates => dispatch => {
   dispatch(updateLengthOfCant(arrayWithUpdates.length));
   dispatch(updateOffsetValue(arrayWithUpdates.lane));
   dispatch(updateProfileSlopeValue(arrayWithUpdates.profile));
+};
+
+export const restoreAll = initialParams => dispatch => {
+  const {
+    profileSlopeValue: profile,
+    laneOffsetValue: lane,
+    normalCrownSlope: normal,
+    fullSuperSlope: full,
+    lengthOfCant: length
+  } = initialParams;
+
+  console.log("resseting");
+  dispatch(updateNormalCrown(normal));
+  dispatch(updateFullCrown(full));
+  dispatch(updateLengthOfCant(length));
+  dispatch(updateOffsetValue(lane));
+  dispatch(updateProfileSlopeValue(profile));
+};
+
+// TESTING SECTION...
+
+export const restoreAll2 = params => {
+  console.log("skcja");
 };

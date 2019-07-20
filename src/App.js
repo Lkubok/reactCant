@@ -15,17 +15,18 @@ import NotFoundPage from "./components/NotFound";
 import { connect } from "react-redux";
 import { updateQuoteTwo, updateAtLaunch } from "./actions";
 import * as selectors from "./reducers/selectors";
+import { ResetButton } from "./components/ResetButton";
 
 export class App extends Component {
   componentDidMount() {
     this.props.updateQuoteTwo();
     if (localStorage.getItem("full")) {
       const objWithUpdates = {
-        full: parseInt(localStorage.getItem("full")),
-        length: parseInt(localStorage.getItem("length")),
-        normal: parseInt(localStorage.getItem("normal")),
-        lane: parseInt(localStorage.getItem("lane")),
-        profile: parseInt(localStorage.getItem("profile"))
+        full: parseFloat(localStorage.getItem("full")),
+        length: parseFloat(localStorage.getItem("length")),
+        normal: parseFloat(localStorage.getItem("normal")),
+        lane: parseFloat(localStorage.getItem("lane")),
+        profile: parseFloat(localStorage.getItem("profile"))
       };
 
       this.props.updateAtLaunch(objWithUpdates);
@@ -52,25 +53,28 @@ export class App extends Component {
   }
   render() {
     return (
-      <Router>
-        <Header />
-        <Navbar />
-        <Main>
-          <Switch>
-            <Route path={"/cant"} component={Cant} />
-            <Route path={"/about"} component={About} />
-            <Route path={"/quote"} component={Quote} />
+      <>
+        <Router>
+          <Header />
+          <Navbar />
+          <Main>
+            <Switch>
+              <Route path={"/cant"} component={Cant} />
+              <Route path={"/about"} component={About} />
+              <Route path={"/quote"} component={Quote} />
 
-            <Route
-              exact
-              path={"/"}
-              component={() => <Redirect to="/about" />}
-            />
-            <Route path="*" component={NotFoundPage} />
-          </Switch>
-          {/* <div>i9i9i9</div>  ADD ELEMENTS TO CLICK*/}
-        </Main>
-      </Router>
+              <Route
+                exact
+                path={"/"}
+                component={() => <Redirect to="/about" />}
+              />
+              <Route path="*" component={NotFoundPage} />
+            </Switch>
+            {/* <div>i9i9i9</div>  ADD ELEMENTS TO CLICK*/}
+          </Main>
+        </Router>
+        {/* <ResetButton /> */}
+      </>
     );
   }
 }

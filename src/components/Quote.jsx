@@ -13,8 +13,6 @@ export class Quote extends Component {
     this.props.updateQuoteTwo();
   }
 
-  componentDidMount() {}
-
   render() {
     return (
       <div className="container d-flex flex-column justify-content-center">

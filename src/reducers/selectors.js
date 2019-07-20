@@ -8,7 +8,7 @@ export const getFullSuperSlope = state => state.cantReducer.fullSuperSlope;
 export const getLengthOfCant = state => state.cantReducer.lengthOfCant;
 export const getSide = state => state.paramsReducer.side;
 
-export const resultSelector = createSelector(
+export const addEdgeSelector = createSelector(
   getLaneOffsetValue,
   getNormalCrownSlope,
   getFullSuperSlope,
@@ -16,8 +16,8 @@ export const resultSelector = createSelector(
   (lane, normal, full, length) => {
     return (
       Math.round(
-        (((Math.abs(normal) + Math.abs(full)) * lane) / length) * 100
-      ) / 100
+        (((Math.abs(normal) + Math.abs(full)) * lane) / length) * 1000
+      ) / 1000
     );
   }
 );
@@ -27,10 +27,21 @@ const getSecondArg = (_state, arg) => arg;
 export const sideSlopeSelector = createSelector(
   getSide,
   getProfileSlopeValue,
-  resultSelector,
+  addEdgeSelector,
   getSecondArg,
   (side, profile, addSlope, argSide) => {
-    if (side === argSide) return Math.round((profile - addSlope) * 100) / 100;
-    return Math.round((profile + addSlope) * 100) / 100;
+    if (side === argSide) return Math.round((profile - addSlope) * 1000) / 1000;
+    return Math.round((profile + addSlope) * 1000) / 1000;
+  }
+);
+
+export const awaitedSlopeValue = createSelector(
+  addEdgeSelector,
+  getProfileSlopeValue,
+  (additional, profile) => {
+    return (
+      Math.sign(profile) *
+      (Math.round((Math.abs(additional) * 2 + 0.2) * 1000) / 1000)
+    );
   }
 );
