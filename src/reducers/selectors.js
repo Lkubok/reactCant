@@ -7,6 +7,7 @@ export const getNormalCrownSlope = state => state.cantReducer.normalCrownSlope;
 export const getFullSuperSlope = state => state.cantReducer.fullSuperSlope;
 export const getLengthOfCant = state => state.cantReducer.lengthOfCant;
 export const getSide = state => state.paramsReducer.side;
+export const getDesignSpeedValue = state => state.cantReducer.designSpeed;
 
 export const addEdgeSelector = createSelector(
   getLaneOffsetValue,

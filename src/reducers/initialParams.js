@@ -3,5 +3,6 @@ export const initialParams = {
   laneOffsetValue: 3.5,
   normalCrownSlope: -2,
   fullSuperSlope: 5,
-  lengthOfCant: 70
+  lengthOfCant: 70,
+  designSpeed: 50
 };
