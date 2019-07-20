@@ -58,7 +58,10 @@ export class CantParams extends PureComponent {
           </div>
         </div>
         <div className="container d-flex flex-column justify-content-center p-0">
-          <button className="btn btn-danger mt-4" onClick={this.handleReset}>
+          <button
+            className="btn btn-danger mt-4 mb-4"
+            onClick={this.handleReset}
+          >
             Restore to default values
           </button>
         </div>
