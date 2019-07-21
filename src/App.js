@@ -18,6 +18,7 @@ import * as selectors from "./reducers/selectors";
 import { ResetButton } from "./components/ResetButton";
 // import Settings from "./components/Settings";
 import { ContactFormik } from "./components/Contact";
+import { PopTask } from "./components/PopTask";
 
 export class App extends Component {
   componentDidMount() {
@@ -69,6 +70,7 @@ export class App extends Component {
               <Route path={"/about"} component={About} />
               <Route path={"/contact"} component={ContactFormik} />
               <Route path={"/quote"} component={Quote} />
+              <Route path={"/tasks"} component={PopTask} />
 
               <Route
                 exact
