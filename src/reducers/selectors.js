@@ -8,6 +8,7 @@ export const getFullSuperSlope = state => state.cantReducer.fullSuperSlope;
 export const getLengthOfCant = state => state.cantReducer.lengthOfCant;
 export const getSide = state => state.paramsReducer.side;
 export const getDesignSpeedValue = state => state.cantReducer.designSpeed;
+export const getTasks = state => state.taskReducer.tasks;
 
 export const addEdgeSelector = createSelector(
   getLaneOffsetValue,
@@ -44,5 +45,12 @@ export const awaitedSlopeValue = createSelector(
       Math.sign(profile) *
       (Math.round((Math.abs(additional) * 2 + 0.2) * 1000) / 1000)
     );
+  }
+);
+
+export const getTasksSelector = createSelector(
+  getTasks,
+  tasks => {
+    return tasks;
   }
 );

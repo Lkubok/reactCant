@@ -47,6 +47,17 @@ export const updateDesignSpeed = speed => ({
   type: "UPDATE_DESIGN_SPEED",
   speed
 });
+export const addTask = (task, id) => ({
+  type: "ADD_TASK",
+  task: {
+    task,
+    id
+  }
+});
+export const removeTask = id => ({
+  type: "REMOVE_TASK",
+  id
+});
 /* export const updateQuoteTwo = (dispatch, quote) => {
   axios
     .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
@@ -106,4 +117,12 @@ export const restoreAll = initialParams => dispatch => {
   dispatch(updateOffsetValue(lane));
   dispatch(updateProfileSlopeValue(profile));
   dispatch(updateDesignSpeed(speed));
+};
+
+export const addAndDelete = (task, time) => dispatch => {
+  const id = Date.now();
+  dispatch(addTask(task, id));
+  setTimeout(() => {
+    dispatch(removeTask(id));
+  }, time * 1000);
 };
