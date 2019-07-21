@@ -14,6 +14,7 @@ export class PopBox extends Component {
   };
   handleRemove = e => {
     console.log(e.target);
+    console.log(e.target);
     const { key } = e.target;
     this.props.remove(key);
   };
