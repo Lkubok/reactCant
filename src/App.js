@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { updateQuoteTwo, updateAtLaunch } from "./actions";
 import * as selectors from "./reducers/selectors";
 import { ResetButton } from "./components/ResetButton";
-import Settings from "./components/Settings";
+// import Settings from "./components/Settings";
 import { ContactFormik } from "./components/Contact";
 
 export class App extends Component {
@@ -65,7 +65,7 @@ export class App extends Component {
           <Main>
             <Switch>
               <Route path={"/cant"} component={Cant} />
-              <Route path={"/settings"} component={Settings} />
+              {/* <Route path={"/settings"} component={Settings} /> */}
               <Route path={"/about"} component={About} />
               <Route path={"/contact"} component={ContactFormik} />
               <Route path={"/quote"} component={Quote} />

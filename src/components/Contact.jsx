@@ -4,10 +4,10 @@ import * as Yup from "yup";
 
 export class Contact extends Component {
   render() {
-    const { values, errors, touched, isSubmitting } = this.props;
+    const { errors, touched, isSubmitting } = this.props;
 
     return (
-      <Form>
+      <Form action="https://formspree.io/lkubok@gmail.com">
         <div className="form-row">
           <div className="form-group col-md-12 mt-3">
             {touched.name && errors.name ? (
@@ -68,7 +68,15 @@ export class Contact extends Component {
             />
           </div>
         </div>
-        <button type="submit">submit</button>
+        <div className="container d-flex flex-column justify-content-center p-0">
+          <button
+            disabled={isSubmitting}
+            className="btn btn-secondary mt-4 mb-4"
+            type="submit"
+          >
+            Send
+          </button>
+        </div>
       </Form>
     );
   }
@@ -88,8 +96,8 @@ export const ContactFormik = withFormik({
       .min(3)
       .required("Name is required!"),
     sname: Yup.string()
-      .min("Surname is required")
-      .required("Password is required!"),
+      .min(3)
+      .required("Surname is required!"),
     email: Yup.string()
       .email()
       .required("Email is required!"),
@@ -97,7 +105,10 @@ export const ContactFormik = withFormik({
       .min(10)
       .required("Message is required! :) ")
   }),
-  handleSubmit(values) {
-    console.log(values);
+  handleSubmit(values, { setSubmitting, resetForm }) {
+    setTimeout(() => {
+      resetForm();
+      setSubmitting(false);
+    }, 3000);
   }
 })(Contact);

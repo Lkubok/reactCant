@@ -28,16 +28,16 @@ export default class Navigation extends React.Component {
                 className={`nav-link pl-5 pr-5 `}
                 to="/cant"
               >
-                <li className={`nav-item `}>Cant Utility</li>
+                <li className={`nav-item `}>Utility</li>
               </NavLink>
 
-              <NavLink
+              {/*          <NavLink
                 activeClassName="active"
                 className={`nav-link pl-5 pr-5 `}
                 to="/settings"
               >
                 <li className={`nav-item `}>Settings</li>
-              </NavLink>
+              </NavLink> */}
 
               <NavLink
                 activeClassName="active"
@@ -58,7 +58,7 @@ export default class Navigation extends React.Component {
                 className={`nav-link pl-5 pr-5 `}
                 to="/quote"
               >
-                <li className={`nav-item `}>Good Quote for rest of day ;) </li>
+                <li className={`nav-item `}>Quotes</li>
               </NavLink>
             </Nav>
           </Collapse>
