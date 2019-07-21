@@ -16,6 +16,8 @@ import { connect } from "react-redux";
 import { updateQuoteTwo, updateAtLaunch } from "./actions";
 import * as selectors from "./reducers/selectors";
 import { ResetButton } from "./components/ResetButton";
+import Settings from "./components/Settings";
+import { ContactFormik } from "./components/Contact";
 
 export class App extends Component {
   componentDidMount() {
@@ -54,7 +56,7 @@ export class App extends Component {
       localStorage.setItem(property, itemToStore[property]);
     }
   }
-    render() {
+  render() {
     return (
       <>
         <Router>
@@ -63,7 +65,9 @@ export class App extends Component {
           <Main>
             <Switch>
               <Route path={"/cant"} component={Cant} />
+              <Route path={"/settings"} component={Settings} />
               <Route path={"/about"} component={About} />
+              <Route path={"/contact"} component={ContactFormik} />
               <Route path={"/quote"} component={Quote} />
 
               <Route
@@ -71,7 +75,7 @@ export class App extends Component {
                 path={"/"}
                 component={() => <Redirect to="/about" />}
               />
-              <Route path="*" component={NotFoundPage} /> 
+              <Route path="*" component={NotFoundPage} />
             </Switch>
             {/* <div>i9i9i9</div>  ADD ELEMENTS TO CLICK*/}
           </Main>

@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 export default createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk)
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // LAUNCH IN DEV MODE
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // LAUNCH IN DEV MODE
   )
 );
