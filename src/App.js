@@ -18,7 +18,8 @@ import * as selectors from "./reducers/selectors";
 import { ResetButton } from "./components/ResetButton";
 // import Settings from "./components/Settings";
 import { ContactFormik } from "./components/Contact";
-import { PopTask } from "./components/PopTask";
+import PopTask from "./components/PopTask";
+import PopBox from "./components/PopBox";
 
 export class App extends Component {
   componentDidMount() {
@@ -83,6 +84,7 @@ export class App extends Component {
           </Main>
         </Router>
         {/* <ResetButton /> */}
+        <PopBox />
       </>
     );
   }

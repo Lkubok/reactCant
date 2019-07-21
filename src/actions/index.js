@@ -47,6 +47,17 @@ export const updateDesignSpeed = speed => ({
   type: "UPDATE_DESIGN_SPEED",
   speed
 });
+export const addTask = task => ({
+  type: "ADD_TASK",
+  task: {
+    task,
+    id: Date.now()
+  }
+});
+export const removeTask = id => ({
+  type: "REMOVE_TASK",
+  id
+});
 /* export const updateQuoteTwo = (dispatch, quote) => {
   axios
     .get("https://hangmann-backend.herokuapp.com/api/quotes/random")
