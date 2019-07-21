@@ -1,5 +1,4 @@
 import axios from "axios";
-import { initialParams } from "../reducers/initialParams";
 
 export const updateQuote = (quote, author) => ({
   type: "UPDATE_QUOTE",
@@ -101,17 +100,10 @@ export const restoreAll = initialParams => dispatch => {
     designSpeed: speed
   } = initialParams;
 
-  console.log("resseting");
   dispatch(updateNormalCrown(normal));
   dispatch(updateFullCrown(full));
   dispatch(updateLengthOfCant(length));
   dispatch(updateOffsetValue(lane));
   dispatch(updateProfileSlopeValue(profile));
   dispatch(updateDesignSpeed(speed));
-};
-
-// TESTING SECTION...
-
-export const restoreAll2 = params => {
-  console.log("skcja");
 };

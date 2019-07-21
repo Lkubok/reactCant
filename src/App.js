@@ -54,7 +54,7 @@ export class App extends Component {
       localStorage.setItem(property, itemToStore[property]);
     }
   }
-  render() {
+    render() {
     return (
       <>
         <Router>
@@ -71,7 +71,7 @@ export class App extends Component {
                 path={"/"}
                 component={() => <Redirect to="/about" />}
               />
-              <Route path="*" component={NotFoundPage} />
+              <Route path="*" component={NotFoundPage} /> 
             </Switch>
             {/* <div>i9i9i9</div>  ADD ELEMENTS TO CLICK*/}
           </Main>

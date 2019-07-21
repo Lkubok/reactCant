@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { restoreAll2 } from "../actions";
+// import { restoreAll2 } from "../actions";
 import { initialParams } from "../reducers/initialParams";
 
 export class ResetButton extends Component {
@@ -26,7 +26,7 @@ export class ResetButton extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  restore: args => dispatch(restoreAll2(args))
+  // restore: args => dispatch(restoreAll2(args))
 });
 
 export default connect(
