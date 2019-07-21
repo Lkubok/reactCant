@@ -61,6 +61,7 @@ export class Cant extends Component {
     return result <= 2.0 && result >= 0.35 ? "alert-success" : "alert-danger";
   };
   render() {
+    // const { values } = this.props;
     return (
       <>
         <Form className="mt-5">
@@ -197,15 +198,14 @@ const FormikCant = withFormik({
       lengthOfCant: lengthOfCant
     };
   },
-  validationSchema: Yup.object().shape({}),
+  // validationSchema: Yup.object().shape({}),
   handleChange(values) {
     console.log(values);
+    this.handleOnChange(values.name, values.value);
   }
-})(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Cant)
-);
+})(Cant);
 
-export default FormikCant;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FormikCant);

@@ -8,7 +8,7 @@ import {
 import Main from "./components/Main";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import Cant from "./components/Cant";
+import FormikCant from "./components/Cant";
 import About from "./components/About";
 import Quote from "./components/Quote";
 import NotFoundPage from "./components/NotFound";
@@ -62,7 +62,7 @@ export class App extends Component {
           <Navbar />
           <Main>
             <Switch>
-              <Route path={"/cant"} component={Cant} />
+              <Route path={"/cant"} component={FormikCant} />
               <Route path={"/about"} component={About} />
               <Route path={"/quote"} component={Quote} />
 
