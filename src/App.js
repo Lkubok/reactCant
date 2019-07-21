@@ -71,7 +71,7 @@ export class App extends Component {
               <Route path={"/about"} component={About} />
               <Route path={"/contact"} component={ContactFormik} />
               <Route path={"/quote"} component={Quote} />
-              <Route path={"/tasks"} component={PopTask} />
+              <Route path={"/notes"} component={PopTask} />
 
               <Route
                 exact

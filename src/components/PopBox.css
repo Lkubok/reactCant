@@ -1,19 +1,24 @@
 .pop-box {
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
-  border: 1px solid black;
+  border: 1px solid #b4edda;
   border-radius: 5px;
-  background-color: green;
+  background-color: #f8f9fa;
   width: 300px;
   text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 .pop-item {
+  flex-basis: 100%;
+  text-align: center;
   position: relative;
-  border: 1px solid red;
+  border: 1px solid #b4edda;
   border-radius: 5px;
-  background-color: green;
-  width: 200px;
+  background-color: #fafafe;
   margin: 10px;
 }
 .display-none {

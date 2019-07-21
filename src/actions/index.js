@@ -47,11 +47,11 @@ export const updateDesignSpeed = speed => ({
   type: "UPDATE_DESIGN_SPEED",
   speed
 });
-export const addTask = task => ({
+export const addTask = (task, id) => ({
   type: "ADD_TASK",
   task: {
     task,
-    id: Date.now()
+    id
   }
 });
 export const removeTask = id => ({
@@ -117,4 +117,12 @@ export const restoreAll = initialParams => dispatch => {
   dispatch(updateOffsetValue(lane));
   dispatch(updateProfileSlopeValue(profile));
   dispatch(updateDesignSpeed(speed));
+};
+
+export const addAndDelete = (task, time) => dispatch => {
+  const id = Date.now();
+  dispatch(addTask(task, id));
+  setTimeout(() => {
+    dispatch(removeTask(id));
+  }, time * 1000);
 };
