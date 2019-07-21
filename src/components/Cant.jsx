@@ -12,6 +12,8 @@ import { connect } from "react-redux";
 import CantParams from "./CantParams";
 import LeftRightSelect from "./LeftRightSelect";
 import * as selectors from "../reducers/selectors";
+import * as Yup from "yup";
+import { withFormik, Form, Field } from "formik";
 
 export class Cant extends Component {
   constructor(props) {
@@ -61,7 +63,7 @@ export class Cant extends Component {
   render() {
     return (
       <>
-        <form className="mt-5">
+        <Form className="mt-5">
           <div className="form-row">
             <div className="form-group col-md-4">
               <label htmlFor="mainSlope">
@@ -83,9 +85,7 @@ export class Cant extends Component {
               <label htmlFor="laneOffset">
                 Offset to edge of lane from rotation axis [m]
               </label>
-              <input
-                onChange={this.handleOnChange}
-                value={this.props.laneOffsetValue}
+              <Field
                 type="number"
                 step="0.1"
                 className="form-control"
@@ -95,9 +95,7 @@ export class Cant extends Component {
             </div>
             <div className="form-group col-md-4">
               <label htmlFor="designSpeed">Design speed [km/h]</label>
-              <input
-                onChange={this.handleOnChange}
-                value={this.props.designSpeed}
+              <Field
                 type="number"
                 step="10"
                 min="30"
@@ -114,9 +112,7 @@ export class Cant extends Component {
               <label htmlFor="normalCrown">
                 Normal Crown Slope [%] (- is down)
               </label>
-              <input
-                onChange={this.handleOnChange}
-                value={this.props.normalCrownSlope}
+              <Field
                 type="number"
                 step="0.1"
                 max="15"
@@ -128,9 +124,7 @@ export class Cant extends Component {
             </div>
             <div className="form-group col-md-4">
               <label htmlFor="fullCrown">Full Super Slope [%]</label>
-              <input
-                onChange={this.handleOnChange}
-                value={this.props.fullSuperSlope}
+              <Field
                 type="number"
                 step="0.1"
                 className="form-control"
@@ -140,9 +134,7 @@ export class Cant extends Component {
             </div>
             <div className="form-group col-md-4">
               <label htmlFor="lengthOfCant">Length of Cant [m]</label>
-              <input
-                onChange={this.handleOnChange}
-                value={this.props.lengthOfCant}
+              <Field
                 type="number"
                 step="0.1"
                 className="form-control"
@@ -162,7 +154,7 @@ export class Cant extends Component {
           </div>
           <LeftRightSelect />
           <CantParams />
-        </form>
+        </Form>
       </>
     );
   }
@@ -187,7 +179,33 @@ const mapDispatchToProps = dispatch => ({
   updateDesignSpeed: arg => dispatch(updateDesignSpeed(arg))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cant);
+const FormikCant = withFormik({
+  mapPropsToValues({
+    profileSlopeValue,
+    laneOffsetValue,
+    designSpeed,
+    normalCrownSlope,
+    lengthOfCant,
+    fullSuperSlope
+  }) {
+    return {
+      mainSlope: profileSlopeValue,
+      laneOffset: laneOffsetValue,
+      designSpeed: designSpeed,
+      normalCrown: normalCrownSlope,
+      fullCrown: fullSuperSlope,
+      lengthOfCant: lengthOfCant
+    };
+  },
+  validationSchema: Yup.object().shape({}),
+  handleChange(values) {
+    console.log(values);
+  }
+})(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Cant)
+);
+
+export default FormikCant;
