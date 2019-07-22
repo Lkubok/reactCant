@@ -15,7 +15,7 @@ import NotFoundPage from "./components/NotFound";
 import { connect } from "react-redux";
 import { updateQuoteTwo, updateAtLaunch } from "./actions";
 import * as selectors from "./reducers/selectors";
-import { ResetButton } from "./components/ResetButton";
+// import { ResetButton } from "./components/ResetButton";
 // import Settings from "./components/Settings";
 import { ContactFormik } from "./components/Contact";
 import PopTask from "./components/PopTask";
