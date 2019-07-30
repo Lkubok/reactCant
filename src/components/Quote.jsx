@@ -18,7 +18,7 @@ export class Quote extends Component {
       <div className="container d-flex flex-column justify-content-center">
         <MainQuote />
         <button className="btn btn-light m-3" onClick={this.handleChange}>
-          Fetch new Quote 2
+          Fetch new Quote
         </button>
       </div>
     );
