@@ -19,6 +19,8 @@ export class Cant extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
   handleOnChange(e) {
+    console.log("koko");
+    console.log(e);
     let { name, value } = e.target;
     value = parseFloat(value);
     if (name === "mainSlope") this.props.changeProfileSlope(value);
@@ -49,14 +51,22 @@ export class Cant extends Component {
     return addSlope;
   } */
   checkAddSlope = () => {
-    const { designSpeed: speed, result } = this.props;
+    const { designSpeed: speed, result, laneOffsetValue: lane } = this.props;
     if (speed >= 100)
-      return result <= 0.9 && result >= 0.35 ? "alert-success" : "alert-danger";
+      return result <= 0.9 && result > lane * 0.1
+        ? "alert-success"
+        : "alert-danger";
     if (speed >= 80)
-      return result <= 1.0 && result >= 0.35 ? "alert-success" : "alert-danger";
+      return result <= 1.0 && result > lane * 0.1
+        ? "alert-success"
+        : "alert-danger";
     if (speed >= 60)
-      return result <= 1.6 && result >= 0.35 ? "alert-success" : "alert-danger";
-    return result <= 2.0 && result >= 0.35 ? "alert-success" : "alert-danger";
+      return result <= 1.6 && result > lane * 0.1
+        ? "alert-success"
+        : "alert-danger";
+    return result <= 2.0 && result > lane * 0.1
+      ? "alert-success"
+      : "alert-danger";
   };
   render() {
     return (

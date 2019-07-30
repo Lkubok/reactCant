@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cant Component should mount 1`] = `
+<Fragment>
+  <form
+    className="mt-5"
+  >
+    <div
+      className="form-row"
+    >
+      <div
+        className="form-group col-md-4"
+      >
+        <label
+          htmlFor="mainSlope"
+        >
+          Main profile slope in %: (up is +, down is -)
+        </label>
+        <input
+          className="form-control"
+          id="mainSlope"
+          max="15"
+          min="-15"
+          name="mainSlope"
+          onChange={[Function]}
+          step="0.01"
+          type="number"
+        />
+      </div>
+      <div
+        className="form-group col-md-4"
+      >
+        <label
+          htmlFor="laneOffset"
+        >
+          Offset to edge of lane from rotation axis [m]
+        </label>
+        <input
+          className="form-control"
+          id="laneOffset"
+          name="laneOffset"
+          onChange={[Function]}
+          step="0.1"
+          type="number"
+          value={1234}
+        />
+      </div>
+      <div
+        className="form-group col-md-4"
+      >
+        <label
+          htmlFor="designSpeed"
+        >
+          Design speed [km/h]
+        </label>
+        <input
+          className="form-control"
+          id="designSpeed"
+          max="120"
+          min="30"
+          name="designSpeed"
+          onChange={[Function]}
+          step="10"
+          type="number"
+        />
+      </div>
+    </div>
+    <div
+      className="form-row"
+    >
+      <div
+        className="form-group col-md-4"
+      >
+        <label
+          htmlFor="normalCrown"
+        >
+          Normal Crown Slope [%] (- is down)
+        </label>
+        <input
+          className="form-control"
+          id="normalCrown"
+          max="15"
+          min="-15"
+          name="normalCrown"
+          onChange={[Function]}
+          step="0.1"
+          type="number"
+        />
+      </div>
+      <div
+        className="form-group col-md-4"
+      >
+        <label
+          htmlFor="fullCrown"
+        >
+          Full Super Slope [%]
+        </label>
+        <input
+          className="form-control"
+          id="fullCrown"
+          name="fullCrown"
+          onChange={[Function]}
+          step="0.1"
+          type="number"
+          value={123}
+        />
+      </div>
+      <div
+        className="form-group col-md-4"
+      >
+        <label
+          htmlFor="lengthOfCant"
+        >
+          Length of Cant [m]
+        </label>
+        <input
+          className="form-control"
+          id="lengthOfCant"
+          name="lengthOfCant"
+          onChange={[Function]}
+          step="0.1"
+          type="number"
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="additionalSlope"
+      >
+        Additional slope on Edges [%]
+      </label>
+      <div
+        className="form-control alert-danger"
+      />
+    </div>
+    <Connect(LeftRightSelect) />
+    <Connect(CantParams) />
+  </form>
+</Fragment>
+`;
